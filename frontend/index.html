@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بوابة المعاملات الحكومية</title>
+
+    <!-- خط عربي رسمي -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="brand">
+        <div class="emblem" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">بوابة المعاملات الحكومية</div>
+          <div class="brand-subtitle">خدمات الأحوال المدنية والمعاملات الرسمية</div>
+        </div>
+      </div>
+
+      <nav class="navlinks" aria-label="القائمة الرئيسية">
+        <a href="./index.html" class="active">الرئيسية</a>
+        <a href="./index.html#services">الخدمات</a>
+        <a href="#" data-nav="help">المساعدة</a>
+        <a href="#" data-nav="about">عن المنصة</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="فتح القائمة">☰</button>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-text">
+          <h1>الخدمات الإلكترونية</h1>
+          <p>
+            يُرجى اختيار الخدمة المطلوبة، ثم إدخال الرقم الوطني للتحقق من البيانات،
+            وإتمام الدفع الرمزي لإصدار الوثيقة بصيغة PDF وفق نموذج رسمي.
+          </p>
+
+          <div class="notice" role="note">
+            <span class="dot" aria-hidden="true"></span>
+            <span>تنبيه: هذه نسخة تجريبية لأغراض المشروع (بيانات افتراضية + دفع وهمي).</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-title">إرشادات الاستخدام</div>
+          <ul class="hero-list">
+            <li>اختر الخدمة من قائمة الخدمات أدناه.</li>
+            <li>أدخل الرقم الوطني بشكل صحيح.</li>
+            <li>أكمل الدفع الرمزي لإصدار الوثيقة.</li>
+            <li>قم بتنزيل الملف PDF وطباعته عند الحاجة.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-head" id="services">
+        <h2>الخدمات المتاحة</h2>
+        <p>اختر الخدمة المطلوبة للبدء.</p>
+      </section>
+
+      <section class="grid" aria-label="قائمة الخدمات">
+        <button class="service-card" type="button" data-service="birth">
+          <div class="service-title">شهادة ميلاد</div>
+          <div class="service-desc">إصدار شهادة ميلاد رسمية للمواطن وفق نموذج معتمد.</div>
+          <div class="service-meta">
+            <span class="price">الرسوم: 1.00 JOD</span>
+            <span class="pill">فوري</span>
+          </div>
+        </button>
+
+        <button class="service-card" type="button" data-service="noc">
+          <div class="service-title">شهادة عدم محكومية</div>
+          <div class="service-desc">إصدار شهادة عدم محكومية وفق نموذج رسمي.</div>
+          <div class="service-meta">
+            <span class="price">الرسوم: 2.00 JOD</span>
+            <span class="pill">فوري</span>
+          </div>
+        </button>
+
+        <button class="service-card" type="button" data-service="health">
+          <div class="service-title">شهادة صحة</div>
+          <div class="service-desc">إصدار شهادة صحة عامة للاستخدامات الرسمية.</div>
+          <div class="service-meta">
+            <span class="price">الرسوم: 1.25 JOD</span>
+            <span class="pill">فوري</span>
+          </div>
+        </button>
+
+        <button class="service-card" type="button" data-service="military">
+          <div class="service-title">دفتر خدمة علم</div>
+          <div class="service-desc">عرض/إصدار بيانات دفتر خدمة العلم وفق نموذج رسمي.</div>
+          <div class="service-meta">
+            <span class="price">الرسوم: 1.75 JOD</span>
+            <span class="pill">فوري</span>
+          </div>
+        </button>
+
+        <button class="service-card" type="button" data-service="residence">
+          <div class="service-title">شهادة سكن</div>
+          <div class="service-desc">إصدار شهادة سكن للمواطن وفق نموذج معتمد.</div>
+          <div class="service-meta">
+            <span class="price">الرسوم: 0.50 JOD</span>
+            <span class="pill">فوري</span>
+          </div>
+        </button>
+
+        <button class="service-card" type="button" data-service="life">
+          <div class="service-title">شهادة حياة</div>
+          <div class="service-desc">إصدار شهادة إثبات حياة للاستخدامات الرسمية.</div>
+          <div class="service-meta">
+            <span class="price">الرسوم: 0.50 JOD</span>
+            <span class="pill">فوري</span>
+          </div>
+        </button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2026 بوابة المعاملات الحكومية — نسخة مشروع</div>
+        <div class="footer-links">
+          <a href="#">سياسة الخصوصية</a>
+          <a href="#">الشروط والأحكام</a>
+          <a href="#">التواصل</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

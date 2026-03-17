@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إدخال الرقم الوطني</title>
+
+    <!-- خط عربي رسمي -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="brand">
+        <div class="emblem" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">بوابة المعاملات الحكومية</div>
+          <div class="brand-subtitle">خدمات الأحوال المدنية والمعاملات الرسمية</div>
+        </div>
+      </div>
+
+      <nav class="navlinks" aria-label="القائمة الرئيسية">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./index.html#services" class="active">الخدمات</a>
+        <a href="#">المساعدة</a>
+        <a href="#">عن المنصة</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="فتح القائمة">☰</button>
+    </header>
+
+    <main class="container">
+      <div class="card">
+        <div class="breadcrumb">
+          <a href="./index.html">الرئيسية</a>
+          <span>›</span>
+          <a href="./index.html#services">الخدمات</a>
+          <span>›</span>
+          <span id="serviceName">الخدمة</span>
+        </div>
+
+        <h2 id="pageTitle" style="margin:0">إدخال الرقم الوطني</h2>
+        <p class="hint" style="margin-top:8px" id="serviceInfo">
+          الرجاء إدخال الرقم الوطني للمتابعة.
+        </p>
+
+        <div class="form-row">
+          <label for="nid">الرقم الوطني</label>
+          <input id="nid" inputmode="numeric" autocomplete="off" placeholder="مثال: 1234567890" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="continueBtn" type="button">متابعة</button>
+          <a class="btn btn-outline" href="./index.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">رجوع</a>
+        </div>
+
+        <div class="error" id="errorBox"></div>
+
+        <p class="hint">
+          ملاحظة: سيتم التحقق من البيانات من قاعدة البيانات (50 مواطن افتراضي) في الخطوات القادمة.
+        </p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2026 بوابة المعاملات الحكومية — نسخة مشروع</div>
+        <div class="footer-links">
+          <a href="#">سياسة الخصوصية</a>
+          <a href="#">الشروط والأحكام</a>
+          <a href="#">التواصل</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./lookup.js"></script>
+  </body>
+</html>

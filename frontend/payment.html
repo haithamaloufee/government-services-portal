@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الدفع</title>
+
+    <!-- خط عربي رسمي -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <header class="navbar">
+      <div class="brand">
+        <div class="emblem" aria-hidden="true"></div>
+        <div class="brand-text">
+          <div class="brand-title">بوابة المعاملات الحكومية</div>
+          <div class="brand-subtitle">خدمات الأحوال المدنية والمعاملات الرسمية</div>
+        </div>
+      </div>
+
+      <nav class="navlinks" aria-label="القائمة الرئيسية">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./index.html#services" class="active">الخدمات</a>
+        <a href="#">المساعدة</a>
+        <a href="#">عن المنصة</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-label="فتح القائمة">☰</button>
+    </header>
+
+    <main class="container">
+      <div class="card">
+        <div class="breadcrumb">
+          <a href="./index.html">الرئيسية</a>
+          <span>›</span>
+          <a href="./index.html#services">الخدمات</a>
+          <span>›</span>
+          <span id="serviceName">الخدمة</span>
+          <span>›</span>
+          <span>الدفع</span>
+        </div>
+
+        <h2 style="margin:0">الدفع</h2>
+        <p class="hint" style="margin-top:8px">
+          يرجى إدخال معلومات دفع وهمية لإتمام العملية (مخصص للمشروع فقط).
+        </p>
+
+        <!-- ملخص العملية -->
+        <div class="summary" id="summaryBox">
+          <div class="summary-row">
+            <div class="summary-label">الخدمة</div>
+            <div class="summary-value" id="sumService">-</div>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">الرقم الوطني</div>
+            <div class="summary-value" id="sumNid">-</div>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">الرسوم</div>
+            <div class="summary-value" id="sumPrice">-</div>
+          </div>
+        </div>
+
+        <!-- نموذج الدفع -->
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="cardNo">رقم البطاقة</label>
+            <input id="cardNo" inputmode="numeric" autocomplete="off" placeholder="16 رقم" />
+          </div>
+
+          <div class="form-row">
+            <label for="exp">تاريخ الانتهاء</label>
+            <input id="exp" autocomplete="off" placeholder="MM/YY" />
+          </div>
+
+          <div class="form-row">
+            <label for="cvv">CVV</label>
+            <input id="cvv" inputmode="numeric" autocomplete="off" placeholder="3 أرقام" />
+          </div>
+
+          <div class="form-row">
+            <label for="holder">اسم حامل البطاقة</label>
+            <input id="holder" autocomplete="off" placeholder="كما هو على البطاقة" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="payBtn" type="button">إتمام الدفع</button>
+          <a class="btn btn-outline" id="backLink" href="./lookup.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">رجوع</a>
+        </div>
+
+        <div class="error" id="errorBox"></div>
+
+        <p class="hint">
+          بعد نجاح الدفع سيتم الانتقال إلى صفحة إصدار الوثيقة وإتاحة تنزيل PDF.
+        </p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2026 بوابة المعاملات الحكومية — نسخة مشروع</div>
+        <div class="footer-links">
+          <a href="#">سياسة الخصوصية</a>
+          <a href="#">الشروط والأحكام</a>
+          <a href="#">التواصل</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./payment.js"></script>
+  </body>
+</html>
