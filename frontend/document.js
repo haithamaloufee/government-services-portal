@@ -1,4 +1,4 @@
-const SERVICES = {
+const SERVICES = window.GOV_PORTAL?.SERVICES || {
   birth: { name: "شهادة ميلاد" },
   noc: { name: "شهادة عدم محكومية" },
   health: { name: "شهادة صحة" },
@@ -19,6 +19,7 @@ const paid = getParam("paid") || "";
 const service = SERVICES[serviceKey] || SERVICES.birth;
 
 const errorBox = document.getElementById("errorBox");
+
 function showError(msg) {
   errorBox.style.display = "block";
   errorBox.textContent = msg;
@@ -40,48 +41,54 @@ function makeRef() {
 
 document.getElementById("refNo").textContent = makeRef();
 
-const d = new Date();
-const issue = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-document.getElementById("issueDate").textContent = issue;
+const currentDate = new Date();
+const issueDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
+document.getElementById("issueDate").textContent = issueDate;
 
 const docTextMap = {
-  birth: "تشهد الدائرة بأن بيانات الميلاد واردة وفق السجلات الرسمية وذلك بناءً على طلب صاحب العلاقة.",
-  noc: "تشهد الدائرة بأنه لا يوجد بحق صاحب العلاقة أحكام أو ملاحقات وفق البيانات المتاحة في هذا النظام التجريبي.",
-  health: "تشهد الجهة المختصة بأن صاحب العلاقة يتمتع بحالة صحية عامة صالحة للاستخدامات الرسمية (نسخة مشروع).",
-  military: "تفيد الدائرة بأن بيانات خدمة العلم لصاحب العلاقة واردة وفق السجلات (نسخة مشروع).",
-  residence: "تشهد الدائرة بأن صاحب العلاقة مقيم وفق العنوان المذكور أعلاه (نسخة مشروع).",
-  life: "تشهد الدائرة بإثبات حياة صاحب العلاقة بتاريخ الإصدار (نسخة مشروع).",
+  birth:
+    "تشهد الدائرة بأن بيانات الميلاد واردة وفق السجلات الرسمية وذلك بناءً على طلب صاحب العلاقة.",
+  noc:
+    "تشهد الدائرة بأنه لا يوجد بحق صاحب العلاقة أحكام أو ملاحقات وفق البيانات المتاحة في هذا النظام التجريبي.",
+  health:
+    "تشهد الجهة المختصة بأن صاحب العلاقة يتمتع بحالة صحية عامة صالحة للاستخدامات الرسمية (نسخة مشروع).",
+  military:
+    "تفيد الدائرة بأن بيانات خدمة العلم لصاحب العلاقة واردة وفق السجلات (نسخة مشروع).",
+  residence:
+    "تشهد الدائرة بأن صاحب العلاقة مقيم وفق العنوان المذكور أعلاه (نسخة مشروع).",
+  life:
+    "تشهد الدائرة بإثبات حياة صاحب العلاقة بتاريخ الإصدار (نسخة مشروع).",
 };
-document.getElementById("docText").textContent = docTextMap[serviceKey] || docTextMap.birth;
+
+document.getElementById("docText").textContent =
+  docTextMap[serviceKey] || docTextMap.birth;
 
 async function loadCitizen() {
-  // نحاول من sessionStorage أولاً
   const cached = sessionStorage.getItem("citizen");
   if (cached) {
     try {
-      const c = JSON.parse(cached);
-      if (c?.national_id === nid) return c;
+      const citizen = JSON.parse(cached);
+      if (citizen?.national_id === nid) {
+        return citizen;
+      }
     } catch {}
   }
 
-  // وإلا من API
-  const res = await fetch(`/api/citizens/${encodeURIComponent(nid)}`);
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.error || "تعذر جلب بيانات المواطن.");
-  return data.citizen;
+  return window.GOV_PORTAL.fetchCitizenByNationalId(nid);
 }
 
 (async () => {
   if (!nid) return showError("الرقم الوطني غير موجود.");
 
   try {
-    const c = await loadCitizen();
-    document.getElementById("fullName").textContent = c.full_name || "—";
-    document.getElementById("dob").textContent = c.dob || "—";
-    document.getElementById("address").textContent = c.address || "—";
-    document.getElementById("nationality").textContent = c.nationality || "—";
-  } catch (e) {
-    showError(e.message || "خطأ في تحميل بيانات المواطن.");
+    const citizen = await loadCitizen();
+    document.getElementById("fullName").textContent = citizen.full_name || "—";
+    document.getElementById("dob").textContent = citizen.dob || "—";
+    document.getElementById("address").textContent = citizen.address || "—";
+    document.getElementById("nationality").textContent =
+      citizen.nationality || "—";
+  } catch (error) {
+    showError(error.message || "خطأ في تحميل بيانات المواطن.");
   }
 })();
 

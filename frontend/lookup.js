@@ -1,4 +1,4 @@
-const SERVICES = {
+const SERVICES = window.GOV_PORTAL?.SERVICES || {
   birth: { name: "شهادة ميلاد", price: 1.0 },
   noc: { name: "شهادة عدم محكومية", price: 2.0 },
   health: { name: "شهادة صحة", price: 1.25 },
@@ -26,23 +26,23 @@ function showError(msg) {
   errorBox.style.display = "block";
   errorBox.textContent = msg;
 }
+
 function clearError() {
   errorBox.style.display = "none";
   errorBox.textContent = "";
 }
 
-function validateNationalId(v) {
-  const s = (v || "").trim();
-  if (!/^\d+$/.test(s)) return "الرجاء إدخال أرقام فقط.";
-  if (s.length < 8 || s.length > 12) return "الرجاء إدخال رقم وطني بطول صحيح (8 إلى 12 رقم).";
+function validateNationalId(value) {
+  const normalized = (value || "").trim();
+  if (!/^\d+$/.test(normalized)) return "الرجاء إدخال أرقام فقط.";
+  if (normalized.length < 8 || normalized.length > 12) {
+    return "الرجاء إدخال رقم وطني بطول صحيح (8 إلى 12 رقمًا).";
+  }
   return null;
 }
 
 async function fetchCitizen(nid) {
-  const res = await fetch(`/api/citizens/${encodeURIComponent(nid)}`);
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.error || "تعذر التحقق من الرقم الوطني.");
-  return data.citizen;
+  return window.GOV_PORTAL.fetchCitizenByNationalId(nid);
 }
 
 document.getElementById("continueBtn").addEventListener("click", async () => {
@@ -54,16 +54,15 @@ document.getElementById("continueBtn").addEventListener("click", async () => {
 
   try {
     const citizen = await fetchCitizen(nid);
-    // نخزن بيانات المواطن مؤقتًا في sessionStorage
     sessionStorage.setItem("citizen", JSON.stringify(citizen));
-
-    // نروح للدفع
     window.location.href = `payment.html?service=${encodeURIComponent(serviceKey)}&nid=${encodeURIComponent(nid)}`;
-  } catch (e) {
-    showError(e.message || "تعذر التحقق من الرقم الوطني.");
+  } catch (error) {
+    showError(error.message || "تعذر التحقق من الرقم الوطني.");
   }
 });
 
-nidInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") document.getElementById("continueBtn").click();
+nidInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    document.getElementById("continueBtn").click();
+  }
 });
